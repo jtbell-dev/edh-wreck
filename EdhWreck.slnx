@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="EdhWreck.Api/EdhWreck.Api.csproj" />
+  <Project Path="EdhWreck.Biz/EdhWreck.Biz.csproj" />
+  <Project Path="EdhWreck.Tests/EdhWreck.Tests.csproj" />
+</Solution>

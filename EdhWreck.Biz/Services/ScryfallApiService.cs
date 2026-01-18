@@ -22,6 +22,18 @@ namespace EdhWreck.Biz.Services
 
             ExpressionBase exp = new GameExpression("paper");
 
+            if (request.Format != null)
+            {
+                if (request.Legality != null )
+                {
+                    exp = exp.And(new LegalityExpression(request.Legality, request.Format));
+                }
+                else
+                {
+                    exp = exp.And(new LegalityExpression(LegalStatus.Legal, request.Format));
+                }
+            }
+
             if (request.MaxCardCost != null)
             {
                 exp = exp.And(new UsdPriceExpression(ValueOperator.LessThanOrEqual, request.MaxCardCost.Value));
@@ -57,24 +69,7 @@ namespace EdhWreck.Biz.Services
             }
 
             var query = new SearchQuery(exp);
-
-            var parameters = new Dictionary<string, string>
-            {
-                { "q", query.GetRawText() },
-                { "order", "edhrec" }
-            };
-            var parametersWithValue = parameters.Where(kv => !string.IsNullOrWhiteSpace(kv.Value));
-            var encodedParameterString = string.Join("&", parametersWithValue.Select(kvp =>
-            {
-                if (!string.IsNullOrWhiteSpace(kvp.Value))
-                {
-                    return $"{kvp.Key}={UrlEncode(kvp.Value)}";
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }));
+            var encodedParameterString = query.GetEncodedParameterString();
             var endpointUrl = $"{ScryfallApiBaseUrl}{ScryfallCardEndpoint}?{encodedParameterString}";
 
             var response = await client.GetAsync(endpointUrl);
@@ -92,10 +87,5 @@ namespace EdhWreck.Biz.Services
             return client;
         }
 
-        private static string UrlEncode(string rawText)
-        {
-            var encodedText = System.Net.WebUtility.UrlEncode(rawText);
-            return encodedText;
-        }
     }
 }

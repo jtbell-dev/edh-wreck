@@ -11,15 +11,27 @@ namespace EdhWreck.Tests.Biz.Models
     public class SearchQueryTests
     {
         [TestMethod]
-        public void SearchQuery_GetRawText_ShouldReturnCorrectRawText()
+        public void SearchQuery_GetEncodedParameterString_SingleExpression_ShouldReturnCorrectParameterText()
         {
             // arrange
             var expression = new OracleTextExpression("flying");
             var searchQuery = new SearchQuery(expression);
             // act
-            var rawText = searchQuery.GetRawText();
+            var rawText = searchQuery.GetEncodedParameterString();
             // assert
-            Assert.AreEqual("o:\"flying\"", rawText);
+            Assert.AreEqual("q=o%3A%22flying%22&order=edhrec", rawText);
+        }
+
+        [TestMethod]
+        public void SearchQuery_GetEncodedParameterString_NullExpression_ShouldReturnCorrectParameterText()
+        {
+            // arrange
+            var expression = new NullExpression();
+            var searchQuery = new SearchQuery(expression);
+            // act
+            var rawText = searchQuery.GetEncodedParameterString();
+            // assert
+            Assert.AreEqual("order=edhrec", rawText);
         }
     }
 }

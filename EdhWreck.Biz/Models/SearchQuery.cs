@@ -1,14 +1,15 @@
 ﻿using EdhWreck.Biz.Expressions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EdhWreck.Biz.Models
 {
     public class SearchQuery : ExpressionBase
     {
-        public required ExpressionBase RootExpression { get; set; }
+        private readonly ExpressionBase _expression;
+        public SearchQuery(ExpressionBase expression)
+        {
+            _expression = expression;
+        }
 
-        public override string GetRawText() => RootExpression.GetRawText();
+        public override string GetRawText() => _expression.GetRawText();
     }
 }

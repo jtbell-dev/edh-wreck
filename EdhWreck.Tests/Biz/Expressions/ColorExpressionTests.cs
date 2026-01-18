@@ -20,7 +20,7 @@ namespace EdhWreck.Tests.Biz.Expressions
         public void ColorExpression_ColorName_ShouldReturnCorrectRawText()
         {
             // Arrange
-            var expression = new ColorExpression(ValueOperator.Equal, Colors.All);
+            var expression = new ColorExpression(ValueOperator.Equal, Colors.Rainbow);
             // Act
             var rawText = expression.GetRawText();
             // Assert

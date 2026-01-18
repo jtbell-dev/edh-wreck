@@ -15,7 +15,7 @@ namespace EdhWreck.Biz.Extensions
             {
                 if (colors == Colors.None)
                 {
-                    return string.Empty;
+                    return "0";
                 }
 
                 var chars = new System.Collections.Generic.List<char>(5);

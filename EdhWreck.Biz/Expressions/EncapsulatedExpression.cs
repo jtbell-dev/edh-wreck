@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EdhWreck.Biz.Expressions
+﻿namespace EdhWreck.Biz.Expressions
 {
-    public class EncapsulatedExpression : ExpressionBase
+    public class EncapsulatedExpression(ExpressionBase innerExpression) : ExpressionBase
     {
-        public ExpressionBase InnerExpression { get; set; }
-        public override string GetRawText() => "(" + InnerExpression.GetRawText() + ")";
+        public override string GetRawText() => "(" + innerExpression.GetRawText() + ")";
     }
 }

@@ -1,5 +1,4 @@
 ﻿using EdhWreck.Biz.Expressions;
-using EdhWreck.Biz.Extensions;
 
 namespace EdhWreck.Biz.Extensions
 {
@@ -15,7 +14,7 @@ namespace EdhWreck.Biz.Extensions
             {
                 if (formats == 0)
                     return string.Empty;
-                var formatNames = new List<KeyValueExpression>();
+                var formatExpressions = new List<KeyValueExpression>();
                 foreach (Formats format in Enum.GetValues<Formats>())
                 {
                     if (format != 0 && formats.HasFlag(format))
@@ -23,10 +22,10 @@ namespace EdhWreck.Biz.Extensions
                         var key = legalStatus.ToQueryString();
                         var oper = ValueOperator.Default;
                         var value = format.ToString().ToLower();
-                        formatNames.Add(new KeyValueExpression(key, oper, value));
+                        formatExpressions.Add(new KeyValueExpression(key, oper, value));
                     }
                 }
-                return string.Join(" ", formatNames);
+                return string.Join(" ", formatExpressions.Select(e => e.GetRawText()));
             }
         }
     }

@@ -49,6 +49,6 @@
         Artifice = White | Black | Blue | Red,
 
         // Rainbow
-        All = White | Blue | Black | Red | Green
+        Rainbow = White | Blue | Black | Red | Green
     }
 }

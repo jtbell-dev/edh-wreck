@@ -2,6 +2,7 @@
 //import ListGroup from './tutorial-components/ListGroup';
 import Alert from './tutorial-components/Alert';
 import Button from './tutorial-components/Button';
+import Home from './components/Home';
 import { useState } from "react";
 
 function App() {
@@ -18,14 +19,20 @@ function App() {
     // 
     // return <div><ListGroup items={items} heading="Cities" onSelectItem={handleSelectItem}/></div>;
 
-    let [showAlert, setShowAlert] = useState(false);
+    //let [showAlert, setShowAlert] = useState(false);
+
+    //return (
+    //    <div>
+    //        { showAlert && <Alert onClose={ () => setShowAlert(false) }>Hello <b>World</b>!</Alert> }
+    //        <Button onClick={ () => setShowAlert(true) }>My Button</Button>
+    //    </div>
+    //);
 
     return (
-        <div>
-            { showAlert && <Alert onClose={ () => setShowAlert(false) }>Hello <b>World</b>!</Alert> }
-            <Button onClick={ () => setShowAlert(true) }>My Button</Button>
-        </div>
-    );
+        <>
+            <Home></Home>
+        </>
+    )
 }
 
 export default App;
